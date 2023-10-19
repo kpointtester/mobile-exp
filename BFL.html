@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sample BFL offer page</title>
+  </head>
+  <style>
+    .container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      height: 100%;
+      width: 100%;
+      gap: 1rem;
+    }
+    .card {
+      width: 50%;
+      aspect-ratio: 9/16;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: antiquewhite;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div
+        class="card"
+        data-video-id="gcc-57f36ab4-6bb7-47da-a246-b7b1e1a620db"
+      >
+        Video0
+      </div>
+      <div
+        class="card"
+        data-video-id="gcc-e4e0facb-03c2-4915-88ce-921f1113eb6c"
+      >
+        Video1
+      </div>
+      <div
+        class="card"
+        data-video-id="gcc-13d56171-15e3-499c-addd-f57541ece32b"
+      >
+        Video2
+      </div>
+      <div
+        class="card"
+        data-video-id="gcc-f437879e-fb3c-4334-ac43-7e09be58458e"
+      >
+        Video3
+      </div>
+      <div
+        class="card"
+        data-video-id="gcc-e52cca4a-5536-4461-af70-127d55bdab88"
+      >
+        Video4
+      </div>
+      <div
+        class="card"
+        data-video-id="gcc-61c156e3-d599-4915-a6bc-5a54f312481d"
+      >
+        Video5
+      </div>
+      <div
+        class="card"
+        data-video-id="gcc-fe0f15f6-e277-42a5-a97e-d8e7a02a2581"
+      >
+        Video6
+      </div>
+      <div
+        class="card"
+        data-video-id="gcc-7c299481-e86a-48a3-8496-8e067ef68016"
+      >
+        Video7
+      </div>
+    </div>
+
+    <div id="kpoint-reels"></div>
+
+    <script>
+
+
+function initPlayer() {
+  const container = document.querySelector("#kpoint-reels");
+  const vxPlayer = VXPlayer(container, {
+    hostname: "showcase-qa.zencite.com",
+    type: "reels",
+    videoIds: [
+      "gcc-57f36ab4-6bb7-47da-a246-b7b1e1a620db",
+      "gcc-e4e0facb-03c2-4915-88ce-921f1113eb6c",
+      "gcc-13d56171-15e3-499c-addd-f57541ece32b",
+      "gcc-e52cca4a-5536-4461-af70-127d55bdab88",
+      "gcc-61c156e3-d599-4915-a6bc-5a54f312481d",
+      "gcc-fe0f15f6-e277-42a5-a97e-d8e7a02a2581",
+      "gcc-7c299481-e86a-48a3-8496-8e067ef68016",
+      "gcc-f437879e-fb3c-4334-ac43-7e09be58458e",
+    ],
+    fullscreen: true,
+    autoScroll: true,
+    mode: "popup",
+  },{
+	"reels": {
+		"list": [{
+			"title": true,
+			"description": true,
+			"userName": true,
+			"userAvatar": true,
+			"like": true,
+			"share": true,
+			"comment": true,
+			"close": true
+		}]
+	}
+});
+  vxPlayer.on("onVideoTimeUpdate", function (index, currentTime) {
+    console.log("onVideoTimeUpdate", index, currentTime);
+  });
+
+  document.querySelectorAll(".card").forEach((thumbEl) => {
+    const videoId = thumbEl.getAttribute("data-video-id");
+    thumbEl.addEventListener("click", (e) => {
+      e.preventDefault();
+      vxPlayer.jumpTo(videoId);
+    });
+  });
+}
+
+if (window.VXPlayer) {
+  initPlayer();
+} else {
+  document.addEventListener("vxplayerready", function () {
+    initPlayer();
+  });
+}
+</script>
+    <script src="https://assets.zencite.com/orca/media/embed/player-vx.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"> 
+ <head>    
+<meta charset="UTF-8" />    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    <title>Document</title>
+</head>
+<body>
+<div id="kpoint-reels" data-vx-host="showcase-qa.zencite.com" data-vx-type="reels"   data-vx-params='{
+        "videoIds": [ ],
+	"fullscreen": false
+}'
+ data-vx-widgets='{
+	"reels": {
+		"list": [{
+			"title": true,
+			"description": true,
+			"userName": true,
+			"userAvatar": true,
+			"like": true,
+			"share": true,
+			"comment": true,
+			"close": true
+		}]
+	}
+}'
+></div>
+<script src="https://assets.zencite.com/orca/media/embed/player-vx.js"></script>
+<script>
+  function getVideoConfig(videoId) {
+    console.log(videoId);
+    let response = {
+      widgetsConfig: {
+        text: {
+          list: [
+            {
+              id: "Text1",
+              text: "Hello {name} you have a pre-approved offer of {amount}",
+              start_time: 0,
+              end_time: 40,
+              top: 20,
+              left: 5,
+              font_color: "white",
+              font_size: "32",
+              padding: 5,
+              align: "fade",
+            },
+          ],
+        },
+      },
+      videoParams: {"search": "true", "add-widgets" : "text" },
+      personalizationInfo: "bGlrZUNvdW50OjM1MDA7Y29tbWVudENvdW50OjkzMDA7c2hhcmVDb3VudDo0NDAwO2twd1ZpZGVvSWQ6Z2NjLTRkYzk1NzM0LWE3ZTQtNDFmYS04NDBhLTgwYWQ0NjkzMTIzYjtuYW1lOkFkaXR5YTthbW91bnQ6NTAwMDs=",
+    };
+    return response;
+  }
+  const listOfVideos = [
+"gcc-4dc95734-a7e4-41fa-840a-80ad4693123b",
+"gcc-57f36ab4-6bb7-47da-a246-b7b1e1a620db",
+"gcc-408ac542-308d-4337-bfe4-de1a2125604e",
+"gcc-e52cca4a-5536-4461-af70-127d55bdab88",
+"gcc-13d56171-15e3-499c-addd-f57541ece32b"
+  ];
+  const maxLimit = 3;
+  function onNextPage(currentPlayerIndex) {
+    console.log("pagination called", currentPlayerIndex);
+    //return list of videos from current index to maxLimit
+    let nextIndex = currentPlayerIndex + 1;
+    let endIndex = nextIndex + maxLimit;
+    if (endIndex > listOfVideos.length) {
+      endIndex = listOfVideos.length;
+    }
+    let nextVideos = listOfVideos.slice(nextIndex, endIndex);
+    console.log(nextVideos);
+    if (nextVideos.length === 0) {
+      return [];
+    } else {
+      return nextVideos;
+    }
+  }
+
+  window.setupVX = function (vxPlayer) {
+    window.bflPlayer = vxPlayer;
+    bflPlayer.on("onVideoTimeUpdate", function (index, currentTime) {
+      console.log("onVideoTimeUpdate", index, currentTime);
+    });
+    return {
+      getVideoConfig: getVideoConfig,
+      onNextPage: onNextPage,
+    };
+  };
+</script>
+</body>
+</html>
