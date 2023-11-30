@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html lang="en"> 
- <head>    
-<meta charset="UTF-8" />    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    <title>Document</title>
-</head>
-<body>
-<div id="kpoint-reels" data-vx-host="showcase-qa.zencite.com" data-vx-type="reels"   data-vx-params='{
-        "videoIds": [ ],
-	"fullscreen": false
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      id="kpoint-reels"
+      data-vx-host="sayali.zencite.com"
+      data-vx-type="reels"
+      data-vx-params='{
+        "videoIds": ["gcc-8a1ac5be-aff0-4005-a585-6dd071fb7d1b",
+					"gcc-8e102bf9-bdc4-4e74-97d7-b7a3d6e18283",
+					"gcc-692c98af-fc55-4122-95be-a87d60f0e52c",
+					"gcc-5c1e1af7-2d63-418e-b53a-ba14e1cbbb46",
+					"gcc-7442dc4d-f09d-4121-a126-4f4411d1f1b2",
+					"gcc-5f579d2e-8623-403b-b906-08784b595e04",
+					"gcc-14f79288-54dd-4cae-9a37-aacf4598a7c7",
+					"gcc-7b622d9c-bb1e-4820-9cd3-85d1789f5b33",
+					"gcc-f95e8787-22f0-4a11-b122-ed1b6f03d632",
+					"gcc-db67240f-deba-4e18-bcce-0d15393c608a"],
+	    "fullscreen": false
 }'
- data-vx-widgets='{
+      data-vx-widgets='{
 	"reels": {
 		"list": [{
 			"title": true,
@@ -18,74 +34,69 @@
 			"like": true,
 			"share": true,
 			"comment": true,
-			"close": true
+			"close": false
 		}]
 	}
 }'
-></div>
-<script src="https://assets.zencite.com/orca/media/embed/player-vx.js"></script>
-<script>
-  function getVideoConfig(videoId) {
-    console.log(videoId);
-    let response = {
-      widgetsConfig: {
-        text: {
-          list: [
-            {
-              id: "Text1",
-              text: "Hello {name} you have a pre-approved offer of {amount}",
-              start_time: 0,
-              end_time: 40,
-              top: 20,
-              left: 5,
-              font_color: "white",
-              font_size: "32",
-              padding: 5,
-              align: "fade",
+    ></div>
+    <script src="https://assets.zencite.com/orca/media/embed/player-vx.js"></script>
+    <script>
+      function getVideoConfig(videoId) {
+        console.log(videoId);
+        let response = {
+          widgetsConfig: {
+            text: {
+              list: [
+                {
+                  id: "Text1",
+                  text: "Hello {name} you have a pre-approved offer of {amount}",
+                  start_time: 0,
+                  end_time: 40,
+                  top: 20,
+                  left: 5,
+                  font_color: "white",
+                  font_size: "32",
+                  padding: 5,
+                  align: "fade",
+                },
+              ],
             },
-          ],
-        },
-      },
-      videoParams: {"search": "true", "add-widgets" : "text" },
-      personalizationInfo: "bGlrZUNvdW50OjM1MDA7Y29tbWVudENvdW50OjkzMDA7c2hhcmVDb3VudDo0NDAwO2twd1ZpZGVvSWQ6Z2NjLTRkYzk1NzM0LWE3ZTQtNDFmYS04NDBhLTgwYWQ0NjkzMTIzYjtuYW1lOkFkaXR5YTthbW91bnQ6NTAwMDs=",
-    };
-    return response;
-  }
-  const listOfVideos = [
-"gcc-4dc95734-a7e4-41fa-840a-80ad4693123b",
-"gcc-57f36ab4-6bb7-47da-a246-b7b1e1a620db",
-"gcc-408ac542-308d-4337-bfe4-de1a2125604e",
-"gcc-e52cca4a-5536-4461-af70-127d55bdab88",
-"gcc-13d56171-15e3-499c-addd-f57541ece32b"
-  ];
-  const maxLimit = 3;
-  function onNextPage(currentPlayerIndex) {
-    console.log("pagination called", currentPlayerIndex);
-    //return list of videos from current index to maxLimit
-    let nextIndex = currentPlayerIndex + 1;
-    let endIndex = nextIndex + maxLimit;
-    if (endIndex > listOfVideos.length) {
-      endIndex = listOfVideos.length;
-    }
-    let nextVideos = listOfVideos.slice(nextIndex, endIndex);
-    console.log(nextVideos);
-    if (nextVideos.length === 0) {
-      return [];
-    } else {
-      return nextVideos;
-    }
-  }
+          },
+          videoParams: { search: "true", "add-widgets": "text" },
+          personalizationInfo:
+            "bGlrZUNvdW50OjM1MDAwMDtjb21tZW50Q291bnQ6OTAwO3NoYXJlQ291bnQ6NDQ7a3B3VmlkZW9JZDpnY2MtNGRjOTU3MzQtYTdlNC00MWZhLTg0MGEtODBhZDQ2OTMxMjNiO25hbWU6QWRpdHlhO2Ftb3VudDo1MDAwOw==",
+        };
+        return response;
+      }
+      const listOfVideos = [];
+      const maxLimit = 3;
+      function onNextPage(currentPlayerIndex) {
+        console.log("pagination called", currentPlayerIndex);
+        //return list of videos from current index to maxLimit
+        let nextIndex = currentPlayerIndex + 1;
+        let endIndex = nextIndex + maxLimit;
+        if (endIndex > listOfVideos.length) {
+          endIndex = listOfVideos.length;
+        }
+        let nextVideos = listOfVideos.slice(nextIndex, endIndex);
+        console.log(nextVideos);
+        if (nextVideos.length === 0) {
+          return [];
+        } else {
+          return nextVideos;
+        }
+      }
 
-  window.setupVX = function (vxPlayer) {
-    window.bflPlayer = vxPlayer;
-    bflPlayer.on("onVideoTimeUpdate", function (index, currentTime) {
-      console.log("onVideoTimeUpdate", index, currentTime);
-    });
-    return {
-      getVideoConfig: getVideoConfig,
-      onNextPage: onNextPage,
-    };
-  };
-</script>
-</body>
+      window.setupVX = function (vxPlayer) {
+        window.bflPlayer = vxPlayer;
+        bflPlayer.on("onVideoTimeUpdate", function (index, currentTime) {
+          console.log("onVideoTimeUpdate", index, currentTime);
+        });
+        return {
+          getVideoConfig: getVideoConfig,
+          //   onNextPage: onNextPage,
+        };
+      };
+    </script>
+  </body>
 </html>
